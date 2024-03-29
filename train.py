@@ -15,7 +15,8 @@ def train(device, model, model_step, train_loader, test_loader, lr=0.001):
     prev_accuracy = 0.0
     stabilized_epochs = 0
     loss = None
-    for epoch in (pbar := tqdm(generator())):
+    pbar = tqdm(range(generator()), desc="epoch")
+    for epoch in pbar:
         model.train()
         for images, labels in train_loader:
             images = images.to(device)
