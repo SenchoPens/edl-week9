@@ -38,7 +38,7 @@ def train(device, model, model_step, train_loader, test_loader, lr=0.001):
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
             accuracy = correct / total
-            pbar.set_description(f'{loss=}, {accuracy=}')
+            pbar.set_description(f'loss={loss}, accuracy={accuracy}')
             
             # Check if accuracy stabilizes
             if abs(accuracy - prev_accuracy) < 0.01:
