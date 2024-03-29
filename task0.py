@@ -21,3 +21,9 @@ def finetune_resnet101(device, *args):
 
 # num_epochs = 10
 # teacher_model = finetune_resnet101(num_epochs, 'cuda:0')
+
+if __name__ == '__main__':
+    from dataset import train_loader, test_loader
+    model, accuracy, epoch, loss = finetune_resnet101('cuda', train_loader, test_loader)
+    print(accuracy, epoch, loss)
+    torch.save(model.state_dict(), 'finetuned_resnet101.pt')
