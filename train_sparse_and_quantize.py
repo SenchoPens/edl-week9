@@ -111,7 +111,7 @@ def main():
     for epoch in pbar:
         train_one_epoch(device, train_loader, pbar, model, criterion, optimizer)
 
-    evaluate(device, test_loader, model)
+    print('Test Accuracy:', evaluate(device, test_loader, model))
     manager.finalize(model)
 
     # Saving model
