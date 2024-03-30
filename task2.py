@@ -19,7 +19,7 @@ def task2(device, teacher, *args):
         label_loss = criterion(student_logits, labels)
         loss = kd_loss(teacher_logits, student_logits, label_loss)
         loss.backward()
-        return loss.item()
+        return loss
 
     accuracy, epoch, loss = train(device, student, model_step, *args)
     return student, accuracy, epoch, loss
@@ -29,6 +29,6 @@ if __name__ == '__main__':
     from dataset import train_loader, test_loader
     teacher = resnet101_random()
     teacher.load_state_dict(torch.load('finetuned_resnet101.pt'))
-    model, accuracy, epoch, loss = task2('cuda', teacher, train_loader, test_loader)
+    model, accuracy, epoch, loss = task2('cuda', teacher, train_loader, test_loader, 0.01)
     print(accuracy, epoch, loss)
     torch.save(model.state_dict(), 'task2.pt')

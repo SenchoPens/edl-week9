@@ -14,7 +14,7 @@ def task1(device, *args):
         outputs = student(images)
         loss = criterion(outputs, labels)
         loss.backward()
-        return loss.item()
+        return loss
     accuracy, epoch, loss = train(device, student, model_step, *args)
     return student, accuracy, epoch, loss
 

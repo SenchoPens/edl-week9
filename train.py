@@ -50,4 +50,4 @@ def train(device, model, model_step, train_loader, test_loader, lr=0.001):
                 stabilized_epochs = 0
             
             prev_accuracy = accuracy
-    return prev_accuracy, epoch, loss
+    return prev_accuracy, epoch, loss.item()
