@@ -15,7 +15,7 @@ def benchmark(model, sample_inputs, batch_size):
 
 
 if __name__ == "__main__":
-    sample_inputs = np.random.randn(32, 3, 224, 224).astype(np.float32)
+    sample_inputs = np.random.randn(32, 3, 32, 32).astype(np.float32)
     benchmark('checkpoints/baseline_resnet.onnx', sample_inputs, 1)
     benchmark('checkpoints/baseline_resnet.onnx', sample_inputs, 32) 
     benchmark('pruned_quantized_resnet.onnx', sample_inputs, 1)
