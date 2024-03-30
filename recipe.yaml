@@ -24,8 +24,8 @@ modifiers:
 
     - !SetLearningRateModifier
         start_epoch: 16.0
-        learning_rate: 10e-3
+        learning_rate: 0.0001
 
     - !EpochRangeModifier
         start_epoch: 0.0
-        end_epoch: 50.0
+        end_epoch: 75.0
