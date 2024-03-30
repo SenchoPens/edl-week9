@@ -34,6 +34,13 @@ def resnet101_pretrained():
     return model
 
 
+def resnet101_random():
+    # model = models.resnet101(models.ResNet101_Weights.IMAGENET1K_V2)
+    model = models.resnet101(pretrained=False)
+    model = adjust_resnet101_for_cifar10(model)
+    return model
+
+
 def resnet101_truncated():
     model = models.resnet101()  # _resnet(Bottleneck, [3, 4, 23, 3])
     model = adjust_resnet101_for_cifar10(model)

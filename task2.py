@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from models import resnet101_truncated, kd_loss
+from models import resnet101_truncated, kd_loss, resnet101_random
 from train import train
 
 
@@ -23,3 +23,12 @@ def task2(device, teacher, *args):
 
     accuracy, epoch = train(device, student, model_step, *args)
     return student, accuracy, epoch
+
+
+if __name__ == '__main__':
+    from dataset import train_loader, test_loader
+    teacher = resnet101_random()
+    teacher.load_state_dict(torch.load('finetuned_resnet101.pt'))
+    model, accuracy, epoch, loss = task2('cuda', teacher, train_loader, test_loader)
+    print(accuracy, epoch, loss)
+    torch.save(model.state_dict(), 'task2.pt')
