@@ -21,6 +21,6 @@ def task1(device, *args):
 
 if __name__ == '__main__':
     from dataset import train_loader, test_loader
-    model, accuracy, epoch, loss = task1('cuda', train_loader, test_loader)
+    model, accuracy, epoch, loss = task1('cuda', train_loader, test_loader, 0.01)
     print(accuracy, epoch, loss)
     torch.save(model.state_dict(), 'task1.pt')
