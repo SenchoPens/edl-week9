@@ -3,7 +3,7 @@ modifiers:
         init_sparsity: 0.05
         final_sparsity: 0.8
         start_epoch: 0.0
-        end_epoch: 30.0
+        end_epoch: 8.0
         update_frequency: 1.0
         params: __ALL_PRUNABLE__
 
@@ -12,20 +12,20 @@ modifiers:
         learning_rate: 0.05
 
     - !LearningRateFunctionModifier
-        start_epoch: 30.0
-        end_epoch: 50.0
+        start_epoch: 8.0
+        end_epoch: 16.0
         lr_func: cosine
         init_lr: 0.05
         final_lr: 0.001
 
     - !QuantizationModifier
-        start_epoch: 50.0
-        freeze_bn_stats_epoch: 60.0
+        start_epoch: 16.0
+        freeze_bn_stats_epoch: 40.0
 
     - !SetLearningRateModifier
-        start_epoch: 50.0
-        learning_rate: 10e-5
+        start_epoch: 16.0
+        learning_rate: 10e-3
 
     - !EpochRangeModifier
         start_epoch: 0.0
-        end_epoch: 80.0
+        end_epoch: 60.0

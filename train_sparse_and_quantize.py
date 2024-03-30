@@ -1,5 +1,6 @@
 from pathlib import Path
 from tqdm.auto import tqdm
+import sys
 
 import torch
 import torch.nn as nn
@@ -11,6 +12,8 @@ from torchvision.models import resnet18, ResNet18_Weights
 from sparseml.pytorch.datasets import ImagenetteDataset, ImagenetteSize
 from sparseml.pytorch.optim import ScheduledModifierManager
 from sparseml.pytorch.utils import export_onnx
+
+from models import resnet101_truncated
 
 
 def save_onnx(model, export_path, convert_qat):
@@ -73,15 +76,12 @@ def main():
     checkpoints_path.mkdir(exist_ok=True)
 
     # Model creation
-    # TODO: change to your best model from subtasks 1.1 - 1.3
+    model = resnet101_truncated()
+    model.load_state_dict(torch.load('task3.pt'))
     model = torch.fx.symbolic_trace(model)
-
 
     save_onnx(model, checkpoints_path / "baseline_resnet.onnx", convert_qat=False)
 
-    # Dataset creation
-    # TODO: change to CIFAR10, add test dataset
-    batch_size = 64
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
@@ -107,7 +107,6 @@ def main():
     # Training Loop
     model.train()
 
-    # TODO: implement `train_one_epoch` function to structure the code better
     pbar = tqdm(range(manager.max_epochs), desc="epoch")
     for epoch in pbar:
         train_one_epoch(device, train_loader, pbar, model, criterion, optimizer)
