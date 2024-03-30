@@ -20,7 +20,7 @@ modifiers:
 
     - !QuantizationModifier
         start_epoch: 16.0
-        freeze_bn_stats_epoch: 40.0
+        freeze_bn_stats_epoch: 100.0
 
     - !SetLearningRateModifier
         start_epoch: 16.0
@@ -28,4 +28,4 @@ modifiers:
 
     - !EpochRangeModifier
         start_epoch: 0.0
-        end_epoch: 60.0
+        end_epoch: 50.0

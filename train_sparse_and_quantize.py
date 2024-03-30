@@ -20,7 +20,7 @@ def save_onnx(model, export_path, convert_qat):
     # It is important to call torch_model.eval() or torch_model.train(False) before exporting the model, to turn the model to inference mode.
     # This is required since operators like dropout or batchnorm behave differently in inference and training mode.
     model.eval()
-    sample_batch = torch.randn((1, 3, 224, 224))
+    sample_batch = torch.randn((1, 3, 32, 32))
     export_onnx(model, sample_batch, export_path, convert_qat=convert_qat)
 
 
